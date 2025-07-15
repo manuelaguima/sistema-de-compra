@@ -1,20 +1,13 @@
 const Compra = require('../model/Compra')
 
 const cadastrar = async (req,res)=>{
-    const dados = req.body
-    console.log(dados)
+    const valores = req.body
     try{
-      const valores = await Compra.create(dados)
-      if(valores){
-        res.status(201).json(valores)
-        console.log(valores)
-      }else{
-        res.status(404).json({message: 'dados não encontrados'})
-        console.log(valores)
-      }
+        const dados = await Compra.create(valores)
+        res.status(200).json(dados)
     }catch(err){
-        console.error('Erro para encontrar dados',err)
-        res.status(500).json({message:'Erro ao cadastrar dados'})
+        console.error('Erro ao cadastrar os dados!',err)
+        res.status(500).json({message: 'Erro ao cadastrar os dados!'})
     }
 }
 
